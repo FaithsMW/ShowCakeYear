@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "com.faiths.mixin.client",
+	"compatibilityLevel": "JAVA_21",
+	"refmap": "showcakeyear-refmap.json",
+	"client": [
+		"CakeMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

@@ -19,7 +19,7 @@ Shows the cake year on the item, applies texture variants for special year patte
   - `/cakes <year> reset`
   - `/cakes` for tutorial/help
 - Override settings are saved to:
-  - `config/showcakeyear-cakes.json`
+  - `config/showcakeyear.json`
 
 ## Commands
 

@@ -1,24 +1,19 @@
 package com.faiths.mixin.client;
 
+import com.faiths.client.CakeItemHelper;
 import com.faiths.client.CakeTextureOverrides;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.RenderPipelines;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 @Mixin(GuiGraphics.class)
 public class CakeMixin {
-    private static final Pattern NUMBER_PATTERN = Pattern.compile("(\\d+)");
     private static final float YEAR_TEXT_SCALE_X = 0.78f;
     private static final float YEAR_TEXT_SCALE_Y = 1.0f;
     private static final int DEFAULT_TEXT_COLOR = 0xFF000000;
@@ -34,7 +29,7 @@ public class CakeMixin {
             return;
         }
 
-        String year = extractYearFromStack(stack);
+        String year = CakeItemHelper.extractYear(stack);
         if (year != null) {
             GuiGraphics graphics = (GuiGraphics) (Object) this;
             int cakeYear = parseYear(year);
@@ -83,38 +78,4 @@ public class CakeMixin {
         graphics.drawString(font, text, x, y, textColor, false);
     }
 
-    private String extractYearFromStack(ItemStack stack) {
-        try {
-            if (!stack.is(Items.CAKE)) {
-                return null;
-            }
-
-            Component displayName = stack.getHoverName();
-            String nameString = displayName.getString();
-            
-            if (!nameString.toLowerCase().contains("cake")) {
-                return null;
-            }
-            
-            Matcher matcher = NUMBER_PATTERN.matcher(nameString);
-            if (matcher.find()) {
-                return matcher.group(1);
-            }
-
-            var loreComponent = stack.get(net.minecraft.core.component.DataComponents.LORE);
-            if (loreComponent != null) {
-                for (Component line : loreComponent.lines()) {
-                    String lineString = line.getString();
-                    
-                    matcher = NUMBER_PATTERN.matcher(lineString);
-                    if (matcher.find()) {
-                        return matcher.group(1);
-                    }
-                }
-            }
-        } catch (Exception e) {
-        }
-
-        return null;
-    }
 }

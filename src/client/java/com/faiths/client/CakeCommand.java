@@ -20,6 +20,8 @@ public final class CakeCommand {
         ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> dispatcher.register(
                 literal("cakes")
                         .executes(context -> sendUsage(context.getSource()))
+                        .then(literal("legacy")
+                                .executes(context -> toggleLegacy(context.getSource())))
                         .then(argument("year", IntegerArgumentType.integer(1))
                                 .then(argument("color", StringArgumentType.word())
                                         .suggests((context, builder) -> {
@@ -84,6 +86,7 @@ public final class CakeCommand {
     private static int sendUsage(FabricClientCommandSource source) {
         List<String> availableColors = CakeTextureOverrides.getAvailableCustomColors();
         source.sendFeedback(Component.literal("=== ShowCakeYear Command Tutorial ===").withStyle(ChatFormatting.GOLD, ChatFormatting.BOLD));
+        source.sendFeedback(Component.literal("/cakes legacy          -> toggle legacy pink name/lore color").withStyle(ChatFormatting.LIGHT_PURPLE));
         source.sendFeedback(Component.literal("/cakes <year> <color>  -> set custom texture for a year").withStyle(ChatFormatting.AQUA));
         source.sendFeedback(Component.literal("/cakes <year> reset    -> remove custom texture for a year").withStyle(ChatFormatting.AQUA));
         source.sendFeedback(Component.literal("/cakes <year>          -> show whether that year has an override").withStyle(ChatFormatting.AQUA));
@@ -94,6 +97,16 @@ public final class CakeCommand {
             source.sendFeedback(Component.literal("No custom colors found yet in assets/showcakeyear/cakes/. Add files like purple.png.").withStyle(ChatFormatting.YELLOW));
         } else {
             source.sendFeedback(Component.literal("Available custom colors: " + String.join(", ", availableColors)).withStyle(ChatFormatting.GREEN));
+        }
+        return 1;
+    }
+
+    private static int toggleLegacy(FabricClientCommandSource source) {
+        boolean enabled = CakeTextureOverrides.toggleLegacyPinkEnabled();
+        if (enabled) {
+            source.sendFeedback(Component.literal("[Cakes] Legacy pink mode enabled. Cake name and SPECIAL lore are now pink.").withStyle(ChatFormatting.LIGHT_PURPLE));
+        } else {
+            source.sendFeedback(Component.literal("[Cakes] Legacy pink mode disabled.").withStyle(ChatFormatting.YELLOW));
         }
         return 1;
     }

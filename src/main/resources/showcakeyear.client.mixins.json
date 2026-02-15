@@ -4,7 +4,8 @@
 	"compatibilityLevel": "JAVA_21",
 	"refmap": "showcakeyear-refmap.json",
 	"client": [
-		"CakeMixin"
+		"CakeMixin",
+		"CakeLegacyColorMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

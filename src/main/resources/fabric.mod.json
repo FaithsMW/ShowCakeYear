@@ -3,12 +3,12 @@
 	"id": "showcakeyear",
 	"version": "${version}",
 	"name": "ShowCakeYear",
-	"description": "Show cake year and rarity colorized!",
+	"description": "Show cake year and rarity colorized! https://www.youtube.com/@faiths69",
 	"authors": [
 		"Faiths!"
 	],
 	"contact": {
-		"homepage": "https://www.youtube.com/@faiths69",
+		"homepage": "https://modrinth.com/project/showcakeyear",
 		"sources": "https://github.com/FaithsMW/ShowCakeYear"
 	},
 	"license": "CC0-1.0",

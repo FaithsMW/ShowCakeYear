@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiGraphics.class)
 public class CakeMixin {
     private static final float YEAR_TEXT_SCALE_X = 0.78f;
-    private static final float YEAR_TEXT_SCALE_Y = 1.0f;
+    private static final float YEAR_TEXT_SCALE_Y = 0.8f;
     private static final int DEFAULT_TEXT_COLOR = 0xFF000000;
     private static final int OUTLINE_COLOR = 0xFFFFFFFF;
     private static final ResourceLocation DEFAULT_CAKE_TEXTURE = ResourceLocation.fromNamespaceAndPath("showcakeyear", "cakes/default.png");
